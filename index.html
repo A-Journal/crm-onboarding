@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>A-Journal CRM — Onboarding Klanten & Taken</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f3ee;--surface:#fff;--ink:#1c1b22;--muted:#63616d;--faint:#837e8b;--line:#e7e3db;--line-soft:#efece5;
+  --cobalt:#2f43d6;--cobalt-600:#2536ad;--cobalt-50:#eef0fd;--clay:#c1613c;--forest:#2f7d5b;--forest-ink:#246a4c;
+  --amber:#b57d1a;--amber-ink:#8a5e12;--amber-bg:#fbf3e3;--rose:#b23a48;--rose-ink:#9a2f3c;--rose-bg:#f9e9eb;
+  --sans:"Hanken Grotesk",ui-sans-serif,system-ui,sans-serif;--display:"Fraunces",ui-serif,Georgia,serif;
+  --r:12px;--shadow:0 1px 2px rgba(28,27,34,.05),0 8px 24px rgba(28,27,34,.08);
+}
+*{box-sizing:border-box}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+section.slide{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;padding:56px 24px 64px;position:relative}
+.wrap{width:100%;max-width:1080px;margin:0 auto}
+.kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--cobalt);font-weight:700;margin-bottom:10px}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(34px,5.4vw,60px);line-height:1.05;margin:0 0 18px;letter-spacing:-.01em}
+h2{font-family:var(--display);font-weight:600;font-size:clamp(28px,3.6vw,40px);line-height:1.12;margin:0 0 20px;letter-spacing:-.01em}
+h3{font-family:var(--display);font-weight:600;font-size:20px;margin:0 0 8px}
+p{margin:0 0 12px}
+.lead{font-size:clamp(18px,2vw,21px);color:var(--muted);max-width:720px}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;box-shadow:0 1px 2px rgba(28,27,34,.04)}
+.card.tint{background:var(--cobalt-50);border-color:transparent}
+.card.warn{background:var(--amber-bg);border-color:#f0dfb5}
+.card.bad{background:var(--rose-bg);border-color:#efcdd2}
+.card.good{background:#e8f3ee;border-color:#cfe5da}
+.num{font-family:var(--display);font-size:34px;color:var(--cobalt);line-height:1;margin-bottom:8px}
+ul.clean{list-style:none;padding:0;margin:0}
+ul.clean li{padding:7px 0 7px 26px;position:relative;border-top:1px solid var(--line-soft)}
+ul.clean li:first-child{border-top:0}
+ul.clean li::before{content:"";position:absolute;left:4px;top:16px;width:8px;height:8px;border-radius:50%;background:var(--cobalt)}
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:40px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line-soft);align-items:start}
+ol.steps li:first-child{border-top:0}
+ol.steps li::before{content:counter(s);width:32px;height:32px;border-radius:50%;background:var(--cobalt);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px}
+.small{font-size:14px;color:var(--muted)}
+.tiny{font-size:12.5px;color:var(--faint)}
+code,kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9em;background:var(--line-soft);padding:1px 6px;border-radius:6px}
+kbd{border:1px solid var(--line);background:var(--surface)}
+a{color:var(--cobalt)}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-size:13px;color:var(--muted);font-weight:500}
+.pill.on{background:var(--cobalt-50);color:var(--cobalt-600);border-color:transparent;font-weight:600}
+.badge{display:inline-block;padding:1px 8px;border-radius:999px;font-size:11.5px;font-weight:600;border:1px solid transparent;white-space:nowrap}
+.b-rose{background:var(--rose-bg);color:var(--rose-ink)}.b-cobalt{background:var(--cobalt-50);color:var(--cobalt-600)}.b-muted{background:var(--line-soft);color:var(--muted)}.b-amber{background:var(--amber-bg);color:var(--amber-ink)}.b-forest{background:#e8f3ee;color:var(--forest-ink)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:10px;font-size:14px;font-weight:600;border:1px solid var(--line);background:var(--surface);color:var(--muted)}
+.btn.primary{background:var(--cobalt);color:#fff;border-color:transparent}
+.btn.sm{padding:4px 9px;font-size:12.5px}
+/* mockups */
+.mock{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;font-size:14px;position:relative}
+.mock .bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line-soft);background:#fbfaf7}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.seg span{padding:5px 12px;font-size:13px;color:var(--muted);font-weight:500}
+.seg span.on{background:var(--cobalt-50);color:var(--cobalt-600);font-weight:600}
+.seg span small{opacity:.7;margin-left:4px}
+.field{display:inline-flex;align-items:center;padding:5px 10px;border:1px solid var(--line);border-radius:10px;background:var(--surface);font-size:13px;color:var(--faint)}
+table.t{width:100%;border-collapse:collapse;font-size:13px}
+table.t th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:600;padding:10px 10px;border-bottom:1px solid var(--line)}
+table.t td{padding:9px 10px;border-bottom:1px solid var(--line-soft);vertical-align:middle;white-space:nowrap}
+table.t td.r,table.t th.r{text-align:right;font-variant-numeric:tabular-nums}
+.co{font-weight:600}.co small{display:block;font-weight:400;color:var(--faint);font-size:12px}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.ok{color:var(--forest-ink)}.warn-t{color:var(--amber-ink)}.bad-t{color:var(--rose-ink)}
+.rows{padding:0 16px}
+.row{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-top:1px solid var(--line-soft)}
+.row:first-child{border-top:0}
+.chk{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--line);flex:none;margin-top:2px;display:flex;align-items:center;justify-content:center;color:#fff}
+.chk.done{background:var(--forest);border-color:var(--forest)}
+.row .t1{font-size:14.5px}.row .t2{font-size:12px;color:var(--faint);margin-top:2px}
+.row .x{color:var(--faint);margin-left:auto}
+.bucket{font-size:13px;font-weight:700;padding:14px 16px 4px}
+.bucket.red{color:var(--rose)}
+.bucket small{font-weight:400;color:var(--faint);margin-left:6px}
+.callout{position:absolute;width:24px;height:24px;border-radius:50%;background:var(--clay);color:#fff;font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px #fff;z-index:2}
+.cn{display:inline-flex;width:20px;height:20px;border-radius:50%;background:var(--clay);color:#fff;font-size:11.5px;font-weight:700;font-style:normal;align-items:center;justify-content:center;flex:none;vertical-align:middle;margin-right:4px;box-shadow:0 0 0 2px #fff}
+.two.stack{grid-template-columns:1fr}
+.two.stack .legend{columns:2;column-gap:28px}
+.two.stack .legend li{break-inside:avoid}
+@media (max-width:700px){.two.stack .legend{columns:1}}
+.legend{counter-reset:c;list-style:none;padding:0;margin:0}
+.legend li{counter-increment:c;display:grid;grid-template-columns:28px 1fr;gap:10px;padding:8px 0;border-top:1px solid var(--line-soft);font-size:14.5px;align-items:start}
+.legend li:first-child{border-top:0}
+.legend li::before{content:counter(c);width:22px;height:22px;border-radius:50%;background:var(--clay);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.legend b{font-weight:600}
+.two{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(260px,.9fr);gap:28px;align-items:start}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+.drawer{max-width:430px}
+.stat{background:var(--paper);border-radius:10px;padding:8px 12px}
+.stat .l{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint)}
+.stat .v{font-weight:600;font-size:15px}.stat .s{font-size:12px;color:var(--muted)}
+.toast{display:inline-flex;align-items:center;gap:12px;background:var(--ink);color:#fff;border-radius:12px;padding:8px 10px 8px 14px;font-size:14px;box-shadow:var(--shadow)}
+.toast .u{background:rgba(255,255,255,.14);padding:4px 10px;border-radius:8px;font-size:12.5px;font-weight:600}
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;position:relative}
+.flow .step .n{font-size:11px;color:var(--cobalt);font-weight:700;letter-spacing:.1em}
+.flow .step b{display:block;margin:4px 0 4px;font-size:15px}
+.flow .step span{font-size:13px;color:var(--muted)}
+.nav{position:fixed;right:18px;bottom:16px;display:flex;gap:6px;align-items:center;z-index:9;font-size:12px;color:var(--faint);background:rgba(245,243,238,.85);backdrop-filter:blur(6px);padding:6px 10px;border-radius:999px;border:1px solid var(--line)}
+.nav button{border:1px solid var(--line);background:var(--surface);border-radius:999px;width:30px;height:30px;cursor:pointer;color:var(--ink);font-size:14px}
+.progress{position:fixed;left:0;top:0;height:3px;background:var(--cobalt);width:0;z-index:9;transition:width .2s}
+.slideno{position:absolute;left:24px;bottom:18px;font-size:12px;color:var(--faint)}
+.menu{display:flex;flex-wrap:wrap;gap:8px}
+.menu span{padding:6px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font-size:14px;color:var(--muted)}
+.menu span.hi{background:var(--cobalt-50);color:var(--cobalt-600);border-color:transparent;font-weight:700}
+.hero{background:linear-gradient(180deg,#fff 0%,var(--paper) 100%)}
+.toc{columns:2;column-gap:28px;font-size:15px}
+.toc a{display:block;padding:5px 0;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line-soft)}
+.toc a:hover{color:var(--cobalt)}
+@media (max-width:640px){.toc{columns:1}section.slide{padding:40px 16px 56px}}
+@media print{section.slide{min-height:auto;page-break-after:always;padding:24px}.nav,.progress{display:none}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<!-- 1 Titel -->
+<section class="slide hero" id="s1"><div class="wrap">
+  <div class="kicker">A-Journal · Wholesale</div>
+  <h1>Het CRM: onboarding<br>Klanten &amp; Taken</h1>
+  <p class="lead">Waarom we een eigen CRM hebben, hoe de schermen <b>Klanten</b> en <b>Taken</b> werken en wat we van elkaar verwachten in het dagelijks gebruik.</p>
+  <p class="small" style="margin-top:22px">Versie 0.40 · oktober 2026 · <a href="https://wholesale.a-journal.nl/crm/">wholesale.a-journal.nl/crm</a></p>
+  <div class="card" style="margin-top:28px;max-width:720px">
+    <div class="toc">
+      <a href="#s2">1. Waarom een CRM</a><a href="#s3">2. Wat het is, in één plaat</a><a href="#s4">3. Kernbegrippen</a>
+      <a href="#s5">4. Het Klanten-scherm</a><a href="#s6">5. De drie klantenlijsten</a><a href="#s7">6. Acties per klant</a><a href="#s8">7. De klantkaart</a>
+      <a href="#s9">8. Het Taken-scherm</a><a href="#s10">9. Een taak maken</a><a href="#s11">10. De beldrawer</a><a href="#s12">11. Afvinken</a>
+      <a href="#s13">12. Taken die het systeem zelf maakt</a><a href="#s14">13. De ochtendmail</a><a href="#s15">14. Dagelijkse routine</a><a href="#s16">15. Spelregels</a><a href="#s17">16. Veelgestelde vragen</a><a href="#s18">17. Wat nog komt</a>
+    </div>
+  </div>
+  <p class="tiny" style="margin-top:18px">Navigeren: pijltjestoetsen of scrollen. Alle klantnamen en cijfers in de voorbeeldschermen zijn fictief.</p>
+  <div class="slideno">1</div>
+</div></section>
+
+<!-- 2 Waarom -->
+<section class="slide" id="s2"><div class="wrap">
+  <div class="kicker">1 · Waarom</div>
+  <h2>Waarom we een eigen CRM hebben</h2>
+  <p class="lead">Wholesale draait op honderden retailers die een paar keer per jaar bestellen. Het probleem was niet te weinig klanten, maar dat we ze <b>ongemerkt kwijtraakten</b>.</p>
+  <div class="grid g3" style="margin-top:22px">
+    <div class="card bad"><div class="num">↓</div><h3>Klanten zakken stil weg</h3><p class="small">Een retailer die vorig seizoen bestelde en nu niet, valt nergens op. In WooCommerce zie je alleen orders die er wél zijn.</p></div>
+    <div class="card warn"><div class="num">7d</div><h3>Nieuwe klanten bestellen niet</h3><p class="small">Een goedgekeurd account zonder eerste order verdwijnt uit beeld. Niemand belt, want niemand ziet het.</p></div>
+    <div class="card tint"><div class="num">?</div><h3>Contact zit in hoofden en mailboxen</h3><p class="small">Wie heeft wanneer met wie gesproken, en wat is afgesproken? Dat stond nergens centraal.</p></div>
+  </div>
+  <div class="card" style="margin-top:18px">
+    <h3>Wat we bewust níet wilden</h3>
+    <p class="small" style="margin:0">Een losse CRM-tool naast de webshop waar klantdata met de hand bijgehouden wordt. Daarom leeft ons CRM <b>bovenop de wholesale-webshop</b>: orders, omzet, laatst-online en openstaand komen automatisch uit WooCommerce (alleen lezen). Wij voegen zelf alleen toe wat de shop niet weet: <b>contactmomenten, taken, eigenaar en notities</b>.</p>
+  </div>
+  <div class="slideno">2</div>
+</div></section>
+
+<!-- 3 Wat het is -->
+<section class="slide" id="s3"><div class="wrap">
+  <div class="kicker">2 · Overzicht</div>
+  <h2>Wat het is, in één plaat</h2>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Waar en hoe inloggen</h3>
+      <ul class="clean">
+        <li>Adres: <a href="https://wholesale.a-journal.nl/crm/">wholesale.a-journal.nl/crm</a> (eigen app, niet in wp-admin).</li>
+        <li>Inloggen met je gewone wholesale-account. Je hebt de CRM-rol nodig; die zet Maurits of Justus aan.</li>
+        <li>Werkt op desktop, tablet en telefoon (menu klapt in op mobiel).</li>
+        <li>Zoeken over alles: <kbd>Ctrl</kbd> + <kbd>K</kbd> (Mac: <kbd>⌘</kbd> + <kbd>K</kbd>).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Het menu</h3>
+      <div class="menu">
+        <span class="hi">Klanten</span><span>Winkelmandjes</span><span>Pro-forma's</span><span>E-mails</span><span>Deals</span><span>Bedrijven</span><span>Contacten</span><span>Nabijheid</span><span class="hi">Taken</span><span>Dashboard</span>
+      </div>
+      <p class="small" style="margin-top:14px">Vandaag gaat het alleen om de twee blauwe: <b>Klanten</b> (wie moet ik opvolgen?) en <b>Taken</b> (wat moet ik vandaag doen?). De rest komt later.</p>
+    </div>
+  </div>
+  <div class="card tint" style="margin-top:18px">
+    <h3>Eén zin om te onthouden</h3>
+    <p style="margin:0;font-size:19px;font-family:var(--display)">Het CRM vertelt je <b>wie</b> je moet bellen, geeft je alles om dat <b>meteen</b> te doen, en onthoudt <b>wat</b> je hebt afgesproken.</p>
+  </div>
+  <div class="slideno">3</div>
+</div></section>
+
+<!-- 4 Begrippen -->
+<section class="slide" id="s4"><div class="wrap">
+  <div class="kicker">3 · Begrippen</div>
+  <h2>Zes begrippen die je overal tegenkomt</h2>
+  <div class="grid g3">
+    <div class="card"><h3>B2B-klant</h3><p class="small">Elk wholesale-account in de webshop. Staat altijd onder <i>Alle B2B-klanten</i>, ook als het CRM er verder niets van weet.</p></div>
+    <div class="card"><h3>Beheerde klant</h3><p class="small">Een B2B-klant die in het CRM is opgenomen. Pas dan kun je er een eigenaar, contactmomenten, taken en notities aan hangen.</p></div>
+    <div class="card"><h3>Eigenaar</h3><p class="small">De verkoper die deze klant beheert. Bepaalt in wiens <i>Opvolgen</i>-lijst en ochtendmail de klant verschijnt.</p></div>
+    <div class="card"><h3>Contactmoment</h3><p class="small">Gebeld, gemaild, sample gestuurd, offerte, meeting. Zet de klok "laatst contact" op nul. Alleen wat je vastlegt, telt.</p></div>
+    <div class="card"><h3>Taak</h3><p class="small">Iets wat iemand op een datum moet doen, meestal gekoppeld aan een klant. Komt uit jezelf, uit een collega of uit het systeem.</p></div>
+    <div class="card"><h3>Snooze</h3><p class="small">Klant tijdelijk uit alle opvolglijsten en de ochtendmail, tot een datum. Voor "weet ik al, komt in januari".</p></div>
+  </div>
+  <div class="card" style="margin-top:18px">
+    <h3>De drie signalen per klant</h3>
+    <div class="grid g3" style="gap:10px">
+      <div><span class="dot" style="background:var(--forest)"></span><b>Laatst online</b><div class="tiny">Wanneer de klant voor het laatst op de wholesale-site was. Groen punt = nu online.</div></div>
+      <div><span class="dot" style="background:var(--amber)"></span><b>Laatste order</b><div class="tiny">Datum laatste bestelling. Oranje vanaf 60 dagen, rood vanaf 90.</div></div>
+      <div><span class="dot" style="background:var(--cobalt)"></span><b>Laatst contact</b><div class="tiny">Laatste vastgelegde contactmoment. Ouder dan 60 dagen bij een klant met orders → badge <span class="badge b-cobalt">opvolgen</span>.</div></div>
+    </div>
+  </div>
+  <div class="slideno">4</div>
+</div></section>
+
+<!-- 5 Klanten-scherm -->
+<section class="slide" id="s5"><div class="wrap">
+  <div class="kicker">4 · Klanten</div>
+  <h2>Het Klanten-scherm</h2>
+  <div class="two stack">
+    <div class="mock">
+      <div class="bar">
+        <i class="cn">1</i><div class="seg"><span class="on">Opvolgen<small>12</small></span><span>Belangrijke klanten<small>48</small></span><span>Alle B2B-klanten<small>760</small></span></div>
+        <i class="cn">2</i><span class="field">🔍 Zoek klant…</span>
+        <span class="field">Sorteer: langst geen contact ▾</span>
+        <i class="cn">3</i><span class="field">Mijn werklijst ▾</span>
+        <i class="cn">4</i><span class="pill">😴 gesnoozed</span>
+        <span class="btn sm" style="margin-left:auto">⬇ CSV</span>
+        <span class="btn sm primary">+ Klant uit wholesale</span>
+      </div>
+      <div style="overflow:auto">
+      <table class="t">
+        <thead><tr><th>Klant</th><th>Laatst online</th><th>Laatste order</th><th>Laatst contact</th><th>Volgende actie</th><th class="r">Orders</th><th class="r">LTV</th><th class="r">Openstaand</th><th></th></tr></thead>
+        <tbody>
+          <tr><td class="co"><i class="cn">5</i>Papeterie Lumière<small>FR · Lyon</small></td><td class="ok"><span class="dot" style="background:var(--forest)"></span>online nu</td><td class="bad-t">4 mnd geleden</td><td>✉️ 3 mnd geleden <span class="badge b-cobalt">opvolgen</span></td><td class="tiny">—</td><td class="r">9</td><td class="r">€ 6.420</td><td class="r">—</td><td><span class="btn sm">Contact</span> <span class="btn sm">😴</span></td></tr>
+          <tr><td class="co">Boekhandel De Zwaan<small>NL · Deventer</small></td><td class="warn-t">34 d geleden</td><td class="warn-t">72 d geleden</td><td><span class="dot" style="background:var(--line)"></span>nog geen contact</td><td class="tiny">📞 Bellen over najaar · 21 okt</td><td class="r">14</td><td class="r">€ 11.080</td><td class="r warn-t">€ 318</td><td><span class="btn sm">Contact</span> <span class="btn sm">😴</span></td></tr>
+          <tr><td class="co">Schreibwaren Krüger<small>DE · Freiburg</small></td><td class="bad-t">5 mnd geleden</td><td class="bad-t">7 mnd geleden</td><td>📞 4 mnd geleden <span class="badge b-cobalt">opvolgen</span></td><td class="tiny">—</td><td class="r">6</td><td class="r">€ 3.950</td><td class="r">—</td><td><span class="btn sm">Contact</span> <span class="btn sm">😴</span></td></tr>
+          <tr><td class="co">Studio Nordlys<small>DK · Aarhus</small></td><td class="ok">3 d geleden</td><td class="ok">12 d geleden</td><td>📦 2 mnd geleden <span class="badge b-cobalt">opvolgen</span></td><td class="tiny">—</td><td class="r">3</td><td class="r">€ 1.760</td><td class="r">—</td><td><span class="btn sm">Contact</span> <span class="btn sm">😴</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+    <ol class="legend">
+      <li><div><b>Drie lijsten</b> met teller: Opvolgen (jouw werklijst, standaard), Belangrijke klanten, Alle B2B-klanten. Zie volgende pagina.</div></li>
+      <li><div><b>Zoeken en sorteren.</b> Vaste sorteerkeuzes: langst geen order, langst geen contact, omzet 12 mnd, meest besteed, hoogste openstaand, A–Z.</div></li>
+      <li><div><b>Wiens werklijst / eigenaar.</b> Standaard jijzelf; kies een collega of "iedereen".</div></li>
+      <li><div><b>Gesnoozed tonen</b>, exporteren naar CSV, en een klant uit de webshop in het CRM opnemen.</div></li>
+      <li><div><b>Per rij</b>: de drie signalen, de volgende geplande taak, orders, LTV (totale omzet), omzet 12 mnd (breed scherm) en openstaand. Klik op de rij voor de klantkaart.</div></li>
+    </ol>
+  </div>
+  <div class="slideno">5</div>
+</div></section>
+
+<!-- 6 Drie lijsten -->
+<section class="slide" id="s6"><div class="wrap">
+  <div class="kicker">5 · Klanten</div>
+  <h2>De drie klantenlijsten</h2>
+  <div class="grid g3">
+    <div class="card tint">
+      <div class="kicker" style="margin-bottom:4px">Standaard</div>
+      <h3>Opvolgen</h3>
+      <p class="small"><b>Jouw werklijst.</b> Beheerde klanten waarvan jij eigenaar bent, die minstens één keer besteld hebben en waarmee <b>meer dan 60 dagen geen contact</b> is vastgelegd.</p>
+      <p class="small">Gesnoozde klanten staan er niet in. De lijst is leeg = alles bijgewerkt. Precies dezelfde selectie staat elke ochtend in je mail.</p>
+    </div>
+    <div class="card">
+      <div class="kicker" style="margin-bottom:4px;color:var(--muted)">Beheer</div>
+      <h3>Belangrijke klanten</h3>
+      <p class="small">Alle klanten die in het CRM zijn opgenomen, ongeacht eigenaar. Hier gebruik je de <b>wegzak-filters</b>: niet besteld in 90 dagen, niet online in 60 dagen (de tegels op het Dashboard linken hierheen).</p>
+      <p class="small">Ook de plek om klanten in bulk aan een verkoper toe te wijzen.</p>
+    </div>
+    <div class="card">
+      <div class="kicker" style="margin-bottom:4px;color:var(--muted)">Compleet</div>
+      <h3>Alle B2B-klanten</h3>
+      <p class="small">Elk wholesale-account uit de webshop, live opgezocht. Zoek op bedrijf, naam of e-mail. Zelfde kolommen en acties.</p>
+      <p class="small">Een klant die hier wel staat maar nog niet beheerd wordt, neem je op met <b>"in CRM beheren"</b>; pas daarna kun je taken en notities koppelen.</p>
+    </div>
+  </div>
+  <div class="card" style="margin-top:18px">
+    <h3>Vuistregel</h3>
+    <p class="small" style="margin:0">Werk dagelijks uit <b>Opvolgen</b>. Kijk wekelijks in <b>Belangrijke klanten</b> met het filter "niet besteld 90 dagen". Gebruik <b>Alle B2B-klanten</b> als je een specifieke klant zoekt.</p>
+  </div>
+  <div class="slideno">6</div>
+</div></section>
+
+<!-- 7 Acties -->
+<section class="slide" id="s7"><div class="wrap">
+  <div class="kicker">6 · Klanten</div>
+  <h2>Acties per klant</h2>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Contact vastleggen</h3>
+      <p class="small">Knop <b>Contact</b> in de rij of op de klantkaart. Kies het type (gebeld, gemaild, sample, offerte, meeting), datum, een korte notitie en optioneel <b>opvolging plannen</b>: dat maakt meteen een taak op de gekozen datum.</p>
+      <p class="small" style="margin:0">Effect: "laatst contact" springt naar vandaag, de klant verdwijnt uit Opvolgen tot over 60 dagen, en het moment staat in de tijdlijn van de klant.</p>
+    </div>
+    <div class="card">
+      <h3>Snooze 😴</h3>
+      <p class="small">Voor klanten waar je bewust even niets mee doet (seizoensklant, net gesproken buiten het systeem om, wacht op levering). Kies een datum; tot die datum telt de klant niet mee in Opvolgen, de wegzak-filters, het Dashboard en de ochtendmail.</p>
+      <p class="small" style="margin:0">Snooze is zichtbaar als badge en altijd op te heffen. Snooze is géén vervanging voor contact vastleggen.</p>
+    </div>
+    <div class="card">
+      <h3>Eigenaar wijzigen</h3>
+      <p class="small" style="margin:0">Dropdown in de rij, of in bulk via "wijs toe" bovenaan de lijst Belangrijke klanten. Zonder eigenaar valt een klant in niemands Opvolgen-lijst: wijs dus altijd iemand aan.</p>
+    </div>
+    <div class="card">
+      <h3>Klant uit wholesale toevoegen</h3>
+      <p class="small" style="margin:0">Knop rechtsboven. Zoek het webshop-account en klik "in CRM beheren". Het CRM maakt het bedrijf aan met de gegevens uit het account en koppelt de ordergeschiedenis automatisch.</p>
+    </div>
+  </div>
+  <div class="slideno">7</div>
+</div></section>
+
+<!-- 8 Klantkaart -->
+<section class="slide" id="s8"><div class="wrap">
+  <div class="kicker">7 · Klanten</div>
+  <h2>De klantkaart</h2>
+  <p class="lead">Klik op een rij en je ziet alles van één klant bij elkaar. De bron van de cijfers is WooCommerce; wat je zelf toevoegt, blijft in het CRM.</p>
+  <div class="grid g3" style="margin-top:18px">
+    <div class="card"><h3>Gegevens</h3><p class="small" style="margin:0">E-mail, telefoon, website, btw-nummer, KvK, valuta, incoterms, betaalconditie, taal, adres en eigen velden. Bewerken via de knop rechtsboven.</p></div>
+    <div class="card"><h3>WooCommerce</h3><p class="small" style="margin:0">Laatst online, laatste order, LTV, openstaand saldo, aantal orders en de recente orders met status. Alleen lezen.</p></div>
+    <div class="card"><h3>Contacten</h3><p class="small" style="margin:0">De personen bij het bedrijf (inkoper, eigenaar, winkelmedewerker) met hun telefoon en e-mail.</p></div>
+    <div class="card"><h3>Activiteiten</h3><p class="small" style="margin:0">Open en afgeronde taken van deze klant, met <b>+ Taak</b> om er direct een aan te maken (klant is dan al ingevuld).</p></div>
+    <div class="card"><h3>Vestigingen</h3><p class="small" style="margin:0">Winkels en adressen, gebruikt door het scherm Nabijheid (wie zit er bij elkaar in de buurt voor een bezoekronde).</p></div>
+    <div class="card"><h3>Notities en tijdlijn</h3><p class="small" style="margin:0">Vrije notities plus de chronologische tijdlijn van contactmomenten, taken en gebeurtenissen. Dit is het gedeelde geheugen van het team.</p></div>
+  </div>
+  <div class="slideno">8</div>
+</div></section>
+
+<!-- 9 Taken-scherm -->
+<section class="slide" id="s9"><div class="wrap">
+  <div class="kicker">8 · Taken</div>
+  <h2>Het Taken-scherm</h2>
+  <div class="two">
+    <div class="mock" style="max-width:640px">
+      <div class="bar">
+        <i class="cn">1</i><div class="seg"><span class="on">Open</span><span>Afgerond</span></div>
+        <i class="cn">2</i><span class="pill on">Mijn taken</span><span class="pill">Iedereen</span>
+        <i class="cn" style="margin-left:auto">3</i><span class="btn sm primary">+ Taak</span>
+      </div>
+      <div class="bucket red"><i class="cn">4</i>🔴 Te laat <small>1</small></div>
+      <div class="rows">
+        <div class="row"><i class="cn">5</i><div class="chk"></div><div><div class="t1">📞 Bel nieuwe klant: Atelier Mimosa — nog geen eerste order</div><div class="t2">Atelier Mimosa · BE · ☎ +32 9 000 00 00 · Iedereen</div></div><span class="badge b-rose">14 okt</span><i class="cn">6</i><span class="x" style="margin-left:0">×</span></div>
+      </div>
+      <div class="bucket">📌 Vandaag <small>2</small></div>
+      <div class="rows">
+        <div class="row"><div class="chk"></div><div><div class="t1">📞 Opnieuw bellen: Schreibwaren Krüger</div><div class="t2">Schreibwaren Krüger · DE · ☎ +49 761 000000 · Sanne</div></div><span class="badge b-cobalt">16 okt</span><span class="x">×</span></div>
+        <div class="row"><div class="chk"></div><div><div class="t1">📦 Sample sturen: nieuwe kaartenlijn</div><div class="t2">Papeterie Lumière · FR · ☎ +33 4 00 00 00 00 · Sanne</div></div><span class="badge b-cobalt">16 okt</span><span class="x">×</span></div>
+      </div>
+      <div class="bucket">📅 Komend <small>1</small></div>
+      <div class="rows">
+        <div class="row"><div class="chk"></div><div><div class="t1">📞 Bellen over najaarsorder</div><div class="t2">Boekhandel De Zwaan · NL · ☎ 0570 000000 · Sanne</div></div><span class="badge b-muted">21 okt</span><span class="x">×</span></div>
+      </div>
+      <div style="height:12px"></div>
+    </div>
+    <ol class="legend">
+      <li><div><b>Open of Afgerond.</b> Afgerond is je archief; daar kun je een taak ook heropenen.</div></li>
+      <li><div><b>Mijn taken of Iedereen.</b> Let op: taken "voor iedereen" (de bellijsten van het systeem) zie je <b>alleen onder Iedereen</b>.</div></li>
+      <li><div><b>+ Taak</b> voor een losse taak; vanuit een klantkaart is de klant al ingevuld.</div></li>
+      <li><div><b>Vier groepen</b>: Te laat (rood), Vandaag, Komend, Zonder datum. Lege groepen verdwijnen.</div></li>
+      <li><div><b>Afvinken</b> met het vakje links. <b>Klik op de tekst</b> van de taak voor de beldrawer (volgende pagina's).</div></li>
+      <li><div><b>×</b> verwijdert de taak definitief. Gebruik dat alleen bij een foutieve taak, niet om "klaar" te zeggen.</div></li>
+    </ol>
+  </div>
+  <div class="slideno">9</div>
+</div></section>
+
+<!-- 10 Taak maken -->
+<section class="slide" id="s10"><div class="wrap">
+  <div class="kicker">9 · Taken</div>
+  <h2>Een taak maken</h2>
+  <div class="two">
+    <div class="mock" style="max-width:480px;padding:18px 20px">
+      <div style="font-family:var(--display);font-weight:600;font-size:18px;margin-bottom:12px">Nieuwe taak</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px"><span class="pill">✅ Taak</span><span class="pill on">📞 Bellen</span><span class="pill">✉️ Mailen</span><span class="pill">📦 Sample sturen</span><span class="pill">📄 Offerte</span><span class="pill">🤝 Meeting</span></div>
+      <div class="tiny" style="margin-bottom:3px">Klant / lead</div><div class="field" style="display:flex;margin-bottom:10px;color:var(--ink)">Boekhandel De Zwaan</div>
+      <div class="tiny" style="margin-bottom:3px">Onderwerp *</div><div class="field" style="display:flex;margin-bottom:10px;color:var(--ink)">Bellen over najaarsorder</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+        <div><div class="tiny" style="margin-bottom:3px">Vervaldatum</div><div class="field" style="display:flex;color:var(--ink)">21-10-2026</div></div>
+        <div><div class="tiny" style="margin-bottom:3px">Eigenaar</div><div class="field" style="display:flex;color:var(--ink)">— mijzelf — ▾</div></div>
+      </div>
+      <div class="tiny" style="margin-bottom:3px">Notitie</div><div class="field" style="display:flex;min-height:54px;align-items:flex-start;margin-bottom:14px">Vroeg vorig jaar naar de planners in blauw.</div>
+      <div style="display:flex;justify-content:flex-end;gap:8px"><span class="btn sm">Annuleren</span><span class="btn sm primary">Opslaan</span></div>
+    </div>
+    <div>
+      <ul class="clean">
+        <li><b>Type</b> zegt wat je gaat doen; het icoon komt terug in de lijst en in "laatst contact".</li>
+        <li><b>Klant / lead</b>: begin te typen, kies uit beheerde klanten en leads. Vanuit een klantkaart is dit al ingevuld. Een taak zonder klant kan, maar dan mist de beldrawer het telefoonnummer.</li>
+        <li><b>Onderwerp</b> is verplicht. Schrijf wat je gaat doen en waarover: "Bellen over najaarsorder", niet "Bellen".</li>
+        <li><b>Vervaldatum</b> staat standaard op over 7 dagen. Taken zonder datum raken zoek; vul hem altijd in.</li>
+        <li><b>Eigenaar</b>: jijzelf of een collega. Zo zet je een taak bij iemand anders op de lijst, met een notitie erbij.</li>
+      </ul>
+      <div class="card tint" style="margin-top:16px"><p class="small" style="margin:0"><b>Sneller:</b> vanuit "Contact vastleggen" op een klant kun je direct een opvolgtaak plannen. En de beldrawer maakt na een gesprek zelf de vervolgtaak aan.</p></div>
+    </div>
+  </div>
+  <div class="slideno">10</div>
+</div></section>
+
+<!-- 11 Beldrawer -->
+<section class="slide" id="s11"><div class="wrap">
+  <div class="kicker">10 · Taken</div>
+  <h2>De beldrawer: bellen zonder van scherm te wisselen</h2>
+  <div class="two">
+    <div class="mock drawer" style="padding:0">
+      <div style="padding:14px 18px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:flex-start">
+        <span style="font-size:20px">📞</span>
+        <div><div style="font-family:var(--display);font-weight:600;font-size:17px">Opnieuw bellen: Schreibwaren Krüger</div><div class="tiny" style="margin-top:4px"><span class="badge b-cobalt">16 okt</span> &nbsp;Eigenaar: Sanne</div></div>
+        <span style="margin-left:auto;color:var(--faint)">✕</span>
+      </div>
+      <div style="padding:16px 18px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><div><div style="font-weight:600;font-size:16px">Schreibwaren Krüger</div><div class="tiny">Anke Krüger · Freiburg, DE · beheerd door Sanne</div></div><a class="small" href="#s8">Klantkaart →</a></div>
+        <div style="display:flex;gap:8px;margin:10px 0 14px;flex-wrap:wrap"><span class="btn primary">📞 +49 761 000000</span><span class="btn">✉️ info@krueger.example</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div class="stat"><div class="l">Laatste order</div><div class="v">12 mrt 2026</div><div class="s">7 mnd geleden</div></div>
+          <div class="stat"><div class="l">Orders</div><div class="v">6</div><div class="s">laatst online 5 mnd geleden</div></div>
+          <div class="stat"><div class="l">Omzet totaal</div><div class="v">€ 3.950</div></div>
+          <div class="stat"><div class="l">Openstaand</div><div class="v">€ 0</div><div class="s">laatst gebeld 4 mnd geleden</div></div>
+        </div>
+        <div style="margin:12px 0;font-size:13px"><div style="display:flex;gap:8px;padding:5px 0;border-bottom:1px solid var(--line-soft)"><b>#WS-18xxx</b><span class="tiny">12 mrt 2026</span><span class="tiny">Afgerond</span><span style="margin-left:auto">€ 612</span></div><div style="display:flex;gap:8px;padding:5px 0"><b>#WS-17xxx</b><span class="tiny">8 okt 2025</span><span class="tiny">Afgerond</span><span style="margin-left:auto">€ 890</span></div></div>
+        <div class="tiny" style="text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Uitkomst</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px"><span class="pill on">📞 Gebeld</span><span class="pill">🕓 Voicemail</span><span class="pill">↻ Niet bereikt</span><span class="pill">✉️ Gemaild</span></div>
+        <div class="field" style="display:flex;min-height:52px;align-items:flex-start;margin-bottom:8px">Gesproken: wil de nieuwe agenda's zien, stuurt volgende week bestelling in.</div>
+        <div class="field" style="display:flex;margin-bottom:10px;color:var(--ink)">Over 1 week ▾</div>
+        <div style="display:flex;justify-content:flex-end;gap:8px"><span class="btn sm">Annuleren</span><span class="btn sm primary">Vastleggen</span></div>
+      </div>
+    </div>
+    <div>
+      <ol class="steps">
+        <li><div><b>Klik op de taak</b> in de lijst. De drawer schuift van rechts in met de klant, telefoonnummer (klikbaar op je telefoon), e-mail en link naar de klantkaart.</div></li>
+        <li><div><b>Lees de cijfers</b> voor je belt: laatste order, aantal orders, omzet, openstaand, de laatste drie orders en wanneer er voor het laatst contact was. Je notitie bij de taak staat eronder.</div></li>
+        <li><div><b>Kies de uitkomst</b>: Gebeld, Voicemail, Niet bereikt of Gemaild. Schrijf in één zin wat is besproken of afgesproken.</div></li>
+        <li><div><b>Vervolgtaak</b>: standaard over 2 dagen bij voicemail of niet bereikt, 1 week na mailen, geen na een gesprek. Pas aan naar wens (morgen tot 1 maand).</div></li>
+        <li><div><b>Vastleggen.</b> Het CRM logt het contactmoment, zet de taak op afgerond en maakt de vervolgtaak op jouw naam. Klaar, volgende.</div></li>
+      </ol>
+      <p class="small" style="margin-top:12px">Niets te melden? Onderaan staat <i>Alleen afronden, niets loggen</i>. Taak zonder gekoppelde klant? Dan zijn de uitkomst-knoppen uit: koppel eerst de klant.</p>
+    </div>
+  </div>
+  <div class="slideno">11</div>
+</div></section>
+
+<!-- 12 Afvinken -->
+<section class="slide" id="s12"><div class="wrap">
+  <div class="kicker">11 · Taken</div>
+  <h2>Afvinken, ongedaan maken, heropenen</h2>
+  <div class="grid g3">
+    <div class="card">
+      <h3>Afvinken</h3>
+      <div class="mock" style="box-shadow:none;margin:10px 0"><div class="rows"><div class="row"><div class="chk done">✓</div><div><div class="t1" style="text-decoration:line-through;color:var(--muted)">📞 Bellen over najaarsorder <span class="badge b-forest">Afgerond</span></div><div class="t2">Boekhandel De Zwaan · NL</div></div></div></div></div>
+      <p class="small" style="margin:0">Klik het vakje. Het vinkje tekent zich, de rij licht groen op en verdwijnt uit de open lijst. Je hoeft niet te wachten op de server.</p>
+    </div>
+    <div class="card">
+      <h3>Ongedaan maken</h3>
+      <div style="margin:14px 0"><span class="toast">✓ <span><b>Taak afgerond</b> · Bellen over najaarsorder</span><span class="u">Ongedaan maken</span></span></div>
+      <p class="small" style="margin:0">Onderin verschijnt zes seconden een bevestiging. Per ongeluk gedrukt? Klik <b>Ongedaan maken</b> en de taak staat terug.</p>
+    </div>
+    <div class="card">
+      <h3>Heropenen</h3>
+      <p class="small">Te laat voor de knop? Ga naar het tabblad <b>Afgerond</b>, zoek de taak en klik het vinkje opnieuw; de taak gaat terug naar Open.</p>
+      <p class="small" style="margin:0">Afgevinkt via de beldrawer? Dan staat het contactmoment al bij de klant; heropenen maakt dat niet ongedaan.</p>
+    </div>
+  </div>
+  <div class="card warn" style="margin-top:18px"><p class="small" style="margin:0"><b>Afvinken ≠ contact vastleggen.</b> Een losse afvink zet alleen de taak op klaar. Heb je de klant écht gesproken of gemaild, gebruik dan de beldrawer (of "Contact vastleggen" op de klant), anders blijft de klant in Opvolgen staan.</p></div>
+  <div class="slideno">12</div>
+</div></section>
+
+<!-- 13 Automatische taken -->
+<section class="slide" id="s13"><div class="wrap">
+  <div class="kicker">12 · Taken</div>
+  <h2>Taken die het systeem zelf maakt</h2>
+  <p class="lead">Niet alle taken komen van een collega. Drie soorten verschijnen vanzelf; je herkent ze aan het onderwerp.</p>
+  <div class="grid g3" style="margin-top:18px">
+    <div class="card">
+      <div class="kicker" style="color:var(--clay)">Nieuwe klant</div>
+      <h3>"Bel nieuwe klant: … — nog geen eerste order"</h3>
+      <p class="small">Een wholesale-account wordt goedgekeurd. Dag 3 zonder order: welkomstmail met hulp. Dag 7 nog steeds geen order: deze beltaak, <b>voor iedereen</b>.</p>
+      <p class="small" style="margin:0">Bestelt de klant alsnog, dan verdwijnt de taak vanzelf. Doel: de eerste order binnen een week na goedkeuring.</p>
+    </div>
+    <div class="card">
+      <div class="kicker" style="color:var(--clay)">Bellijst topklanten</div>
+      <h3>"Bel: …" (seizoensachterstand)</h3>
+      <p class="small">Bestaande klanten die dit seizoen <b>ver achterblijven</b> op wat we op basis van vorige seizoenen van ze verwachten. Het systeem rangschikt op het grootste gat.</p>
+      <p class="small" style="margin:0">Vanaf maandag 19 oktober: <b>5 per werkdag</b>, voor iedereen. Onder "Iedereen" pak je er een, belt via de drawer en legt de uitkomst vast.</p>
+    </div>
+    <div class="card">
+      <div class="kicker" style="color:var(--clay)">Vervolg</div>
+      <h3>"Opnieuw bellen: …" / "Opvolgen: …"</h3>
+      <p class="small">Gemaakt door de beldrawer of door "Opvolging plannen" bij een contactmoment. Staat op naam van wie het contact vastlegde, met de vorige notitie erbij.</p>
+      <p class="small" style="margin:0">Zo blijft een "bel over twee dagen terug" nooit in een hoofd hangen.</p>
+    </div>
+  </div>
+  <div class="card warn" style="margin-top:18px"><p class="small" style="margin:0"><b>Belangrijk:</b> de eerste twee soorten staan op "iedereen" en zijn dus <b>onzichtbaar onder "Mijn taken"</b> en staan niet in je ochtendmail. Zet de lijst op <b>Iedereen</b> of maak de taak van jezelf (open de taak via de klantkaart → Bewerken → eigenaar).</p></div>
+  <div class="slideno">13</div>
+</div></section>
+
+<!-- 14 Ochtendmail -->
+<section class="slide" id="s14"><div class="wrap">
+  <div class="kicker">13 · Taken</div>
+  <h2>De ochtendmail (07:30)</h2>
+  <div class="two">
+    <div class="mock" style="max-width:560px;padding:20px 22px;font-size:14px">
+      <div class="tiny" style="margin-bottom:10px">Van: wholesale@a-journal.nl · Onderwerp: <b>3 taken, 4 op te volgen</b></div>
+      <div style="font-family:var(--display);font-weight:600;font-size:17px;margin-bottom:8px">Goedemorgen Sanne</div>
+      <div style="font-weight:700;margin:10px 0 4px">Vandaag en te laat (3)</div>
+      <ul class="small" style="margin:0 0 6px 18px;padding:0"><li><b>Opnieuw bellen: Schreibwaren Krüger</b> · 16 okt</li><li><b>Sample sturen: nieuwe kaartenlijn</b> · Papeterie Lumière · 16 okt</li><li><b>Bel nieuwe klant: Atelier Mimosa</b> · 14 okt (te laat)</li></ul>
+      <div style="font-weight:700;margin:10px 0 4px">Zonder datum (0)</div>
+      <div style="font-weight:700;margin:10px 0 4px">Op te volgen (4)</div>
+      <ul class="small" style="margin:0 0 6px 18px;padding:0"><li>Papeterie Lumière · laatst contact 3 mnd geleden</li><li>Schreibwaren Krüger · laatst contact 4 mnd geleden</li><li>Studio Nordlys · laatst contact 2 mnd geleden</li><li>…</li></ul>
+      <div class="tiny" style="margin-top:10px">→ Open het CRM</div>
+    </div>
+    <div>
+      <ul class="clean">
+        <li>Iedere eigenaar krijgt elke werkdag rond <b>07:30</b> één mail, alleen als er iets in staat.</li>
+        <li><b>Drie blokken</b>: taken van vandaag en te laat, taken zonder datum, en de top van je Opvolgen-lijst.</li>
+        <li>De selectie is <b>precies gelijk</b> aan wat je in het CRM ziet onder Taken (Mijn taken) en Klanten → Opvolgen. Gesnoozde klanten staan er niet in.</li>
+        <li>Taken "voor iedereen" staan er niet in; die haal je zelf op onder Taken → Iedereen.</li>
+      </ul>
+      <div class="card tint" style="margin-top:16px"><p class="small" style="margin:0">De mail is je startpunt, niet je werkplek. Afhandelen doe je in het CRM, zodat het vastligt.</p></div>
+    </div>
+  </div>
+  <div class="slideno">14</div>
+</div></section>
+
+<!-- 15 Routine -->
+<section class="slide" id="s15"><div class="wrap">
+  <div class="kicker">14 · Werkwijze</div>
+  <h2>De dagelijkse routine (± 20 minuten)</h2>
+  <div class="flow">
+    <div class="step"><div class="n">07:30</div><b>Ochtendmail</b><span>Lees wat er vandaag op je ligt.</span></div>
+    <div class="step"><div class="n">STAP 1</div><b>Taken → Mijn taken</b><span>Werk Te laat en Vandaag af via de beldrawer.</span></div>
+    <div class="step"><div class="n">STAP 2</div><b>Taken → Iedereen</b><span>Pak je deel van de bellijst (richtlijn: 5 per dag).</span></div>
+    <div class="step"><div class="n">STAP 3</div><b>Klanten → Opvolgen</b><span>Loop de lijst af: contact vastleggen, taak plannen of snoozen.</span></div>
+    <div class="step"><div class="n">KLAAR</div><b>Lege lijsten</b><span>"Niets op te volgen 🎉" betekent: alles is bijgewerkt.</span></div>
+  </div>
+  <div class="grid g2" style="margin-top:18px">
+    <div class="card">
+      <h3>Wekelijks (vrijdag, 15 min)</h3>
+      <ul class="clean">
+        <li>Klanten → Belangrijke klanten, filter "niet besteld 90 dagen": wie verrast je?</li>
+        <li>Taken → Afgerond: klopt het beeld van de week?</li>
+        <li>Nieuwe accounts zonder eigenaar toewijzen.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Onderweg of op de beurs</h3>
+      <ul class="clean">
+        <li>Het CRM werkt op je telefoon; het telefoonnummer in de beldrawer belt direct.</li>
+        <li>Leg een gesprek meteen vast; een notitie van één zin is genoeg.</li>
+        <li>Zoek een klant snel met <kbd>Ctrl</kbd>+<kbd>K</kbd>.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slideno">15</div>
+</div></section>
+
+<!-- 16 Spelregels -->
+<section class="slide" id="s16"><div class="wrap">
+  <div class="kicker">15 · Afspraken</div>
+  <h2>Spelregels</h2>
+  <div class="grid g2">
+    <div class="card good"><h3>Wel</h3>
+      <ul class="clean">
+        <li><b>Elk contact vastleggen</b>, ook een kort telefoontje. Wat niet is vastgelegd, bestaat niet voor het CRM.</li>
+        <li><b>Elke taak een datum</b> en een onderwerp dat zegt waarover.</li>
+        <li><b>Vervolgtaak in plaats van onthouden.</b> "Bel over twee weken terug" is een taak, geen notitie.</li>
+        <li><b>Snoozen met reden</b> in de notitie, met een realistische datum.</li>
+        <li><b>Eigenaar zetten</b> op iedere beheerde klant.</li>
+      </ul>
+    </div>
+    <div class="card bad"><h3>Niet</h3>
+      <ul class="clean">
+        <li><b>Afvinken als vervanging</b> van contact vastleggen.</li>
+        <li><b>× gebruiken</b> om een taak weg te werken; × verwijdert definitief.</li>
+        <li><b>Snoozen omdat de lijst te lang is.</b> Verdeel dan taken of overleg.</li>
+        <li><b>Klantgegevens in de notitie</b> bijwerken: telefoon en e-mail horen in Gegevens op de klantkaart.</li>
+        <li><b>Buiten het CRM om</b> afspraken maken met klanten zonder ze erin te zetten.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card" style="margin-top:18px"><p class="small" style="margin:0"><b>Waarom zo streng?</b> De Opvolgen-lijst, de ochtendmail en de wegzak-signalen zijn alleen betrouwbaar als iedereen alles vastlegt. Eén collega die buiten het systeem werkt, maakt de lijst voor iedereen onbetrouwbaar.</p></div>
+  <div class="slideno">16</div>
+</div></section>
+
+<!-- 17 FAQ -->
+<section class="slide" id="s17"><div class="wrap">
+  <div class="kicker">16 · Hulp</div>
+  <h2>Veelgestelde vragen</h2>
+  <div class="grid g2">
+    <div class="card"><h3>Ik zie de bellijst niet.</h3><p class="small" style="margin:0">Ga naar Taken en kies <b>Iedereen</b>. Systeemtaken staan op "iedereen", niet op jouw naam.</p></div>
+    <div class="card"><h3>Een klant staat niet in Opvolgen.</h3><p class="small" style="margin:0">Vier mogelijke redenen: jij bent niet de eigenaar, de klant heeft nog nooit besteld, er is korter dan 60 dagen geleden contact vastgelegd, of de klant is gesnoozed (zet "gesnoozed" aan om te zien).</p></div>
+    <div class="card"><h3>Geen telefoonnummer in de drawer.</h3><p class="small" style="margin:0">Het registratieformulier vraagt er niet verplicht om. Zoek het nummer via de website van de klant en vul het in op de klantkaart onder Gegevens → Bewerken; de drawer gebruikt het daarna direct.</p></div>
+    <div class="card"><h3>Taak per ongeluk afgerond.</h3><p class="small" style="margin:0">Binnen zes seconden: <b>Ongedaan maken</b> onderin. Daarna: tabblad Afgerond → vinkje opnieuw klikken.</p></div>
+    <div class="card"><h3>De taak zegt "niet aan een klant gekoppeld".</h3><p class="small" style="margin:0">Open de klantkaart van het juiste bedrijf en maak daar de taak opnieuw aan, of vraag Maurits of Justus om de taak te koppelen. Zonder koppeling kan de drawer niets loggen.</p></div>
+    <div class="card"><h3>Ik wil een klant overdragen.</h3><p class="small" style="margin:0">Eigenaar-dropdown in de rij, of in bulk in Belangrijke klanten. Open taken van die klant houden hun eigen eigenaar; pas die apart aan.</p></div>
+  </div>
+  <div class="slideno">17</div>
+</div></section>
+
+<!-- 18 Wat nog komt -->
+<section class="slide" id="s18"><div class="wrap">
+  <div class="kicker">17 · Vooruitblik</div>
+  <h2>Wat nog komt, en waar je feedback kwijt kunt</h2>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Op de rol</h3>
+      <ul class="clean">
+        <li>Taken standaard op <b>Iedereen</b> zodra je eigen lijst leeg is, zodat de bellijst niet verstopt zit.</li>
+        <li>Telefoonnummer verplicht bij registratie van nieuwe wholesale-klanten.</li>
+        <li>Mobiele controle van alle schermen op een smal telefoonscherm.</li>
+        <li>E-mail-logging: mails aan klanten automatisch als contactmoment.</li>
+      </ul>
+    </div>
+    <div class="card tint">
+      <h3>Jouw feedback telt</h3>
+      <p class="small">Het CRM is in eigen huis gebouwd en wordt wekelijks bijgewerkt. Mis je een knop, klopt een cijfer niet, of kost iets te veel klikken?</p>
+      <p class="small" style="margin:0">Meld het aan <b>Maurits</b> of <b>Justus</b> met het scherm en de klant erbij. Kleine dingen zitten er vaak binnen een dag in; de beldrawer is zo ontstaan.</p>
+    </div>
+  </div>
+  <div class="card" style="margin-top:18px;text-align:center;padding:30px">
+    <div style="font-family:var(--display);font-size:26px;font-weight:600;margin-bottom:8px">Aan de slag</div>
+    <a href="https://wholesale.a-journal.nl/crm/" class="btn primary" style="font-size:16px;padding:10px 20px">Open het CRM →</a>
+    <p class="tiny" style="margin:14px 0 0">Inloggen met je wholesale-account. Geen toegang? Vraag de CRM-rol aan.</p>
+  </div>
+  <div class="slideno">18</div>
+</div></section>
+
+<div class="nav"><button id="prev" aria-label="Vorige">‹</button><span id="pos">1 / 18</span><button id="next" aria-label="Volgende">›</button></div>
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('section.slide'));
+  var pos=document.getElementById('pos'),bar=document.getElementById('progress');
+  function cur(){var y=window.scrollY+window.innerHeight/2,i=0;slides.forEach(function(s,k){if(s.offsetTop<=y)i=k;});return i;}
+  function go(i){i=Math.max(0,Math.min(slides.length-1,i));slides[i].scrollIntoView({behavior:'smooth'});}
+  function upd(){var i=cur();pos.textContent=(i+1)+' / '+slides.length;bar.style.width=((i+1)/slides.length*100)+'%';}
+  document.getElementById('prev').onclick=function(){go(cur()-1)};
+  document.getElementById('next').onclick=function(){go(cur()+1)};
+  window.addEventListener('keydown',function(e){
+    if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();go(cur()+1);}
+    if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(cur()-1);}
+    if(e.key==='Home'){go(0);} if(e.key==='End'){go(slides.length-1);}
+  });
+  window.addEventListener('scroll',upd,{passive:true});upd();
+})();
+</script>
+</body>
+</html>
