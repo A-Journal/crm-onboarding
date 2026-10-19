@@ -216,10 +216,10 @@ table.t td.r,table.t th.r{text-align:right;font-variant-numeric:tabular-nums}
   <div class="two stack">
     <div class="mock">
       <div class="bar">
-        <i class="cn">1</i><div class="seg"><span class="on">Opvolgen<small>12</small></span><span>Belangrijke klanten<small>48</small></span><span>Alle B2B-klanten<small>760</small></span></div>
+        <i class="cn">1</i><div class="seg"><span class="on">Alle B2B-klanten<small>760</small></span><span>Opvolgen<small>12</small></span><span>Belangrijke klanten<small>48</small></span></div>
         <i class="cn">2</i><span class="field">🔍 Zoek klant…</span>
         <span class="field">Sorteer: langst geen contact ▾</span>
-        <i class="cn">3</i><span class="field">Mijn werklijst ▾</span>
+        <i class="cn">3</i><span class="field">Alle eigenaren ▾</span>
         <i class="cn">4</i><span class="pill">😴 gesnoozed</span>
         <span class="btn sm" style="margin-left:auto">⬇ CSV</span>
         <span class="btn sm primary">+ Klant uit wholesale</span>
@@ -237,9 +237,9 @@ table.t td.r,table.t th.r{text-align:right;font-variant-numeric:tabular-nums}
       </div>
     </div>
     <ol class="legend">
-      <li><div><b>Drie lijsten</b> met teller: Opvolgen (jouw werklijst, standaard), Belangrijke klanten, Alle B2B-klanten. Zie volgende pagina.</div></li>
+      <li><div><b>Drie lijsten</b> met teller: Alle B2B-klanten (standaard, alle eigenaren), Opvolgen (jouw werklijst), Belangrijke klanten. Zie volgende pagina.</div></li>
       <li><div><b>Zoeken en sorteren.</b> Vaste sorteerkeuzes: langst geen order, langst geen contact, omzet 12 mnd, meest besteed, hoogste openstaand, A–Z.</div></li>
-      <li><div><b>Wiens werklijst / eigenaar.</b> Standaard jijzelf; kies een collega of "iedereen".</div></li>
+      <li><div><b>Eigenaar-filter.</b> Standaard iedereen; bij Opvolgen schakelt hij naar jouw eigen werklijst.</div></li>
       <li><div><b>Gesnoozed tonen</b>, exporteren naar CSV, en een klant uit de webshop in het CRM opnemen.</div></li>
       <li><div><b>Per rij</b>: de drie signalen, de volgende geplande taak, orders, LTV (totale omzet), omzet 12 mnd (breed scherm) en openstaand. Klik op de rij voor de klantkaart.</div></li>
     </ol>
@@ -253,7 +253,7 @@ table.t td.r,table.t th.r{text-align:right;font-variant-numeric:tabular-nums}
   <h2>De drie klantenlijsten</h2>
   <div class="grid g3">
     <div class="card tint">
-      <div class="kicker" style="margin-bottom:4px">Standaard</div>
+      <div class="kicker" style="margin-bottom:4px">Werklijst</div>
       <h3>Opvolgen</h3>
       <p class="small"><b>Jouw werklijst.</b> Beheerde klanten waarvan jij eigenaar bent, die minstens één keer besteld hebben en waarmee <b>meer dan 60 dagen geen contact</b> is vastgelegd.</p>
       <p class="small">Gesnoozde klanten staan er niet in. De lijst is leeg = alles bijgewerkt. Precies dezelfde selectie staat elke ochtend in je mail.</p>
@@ -265,15 +265,15 @@ table.t td.r,table.t th.r{text-align:right;font-variant-numeric:tabular-nums}
       <p class="small">Ook de plek om klanten in bulk aan een verkoper toe te wijzen.</p>
     </div>
     <div class="card">
-      <div class="kicker" style="margin-bottom:4px;color:var(--muted)">Compleet</div>
+      <div class="kicker" style="margin-bottom:4px;color:var(--muted)">Standaard</div>
       <h3>Alle B2B-klanten</h3>
-      <p class="small">Elk wholesale-account uit de webshop, live opgezocht. Zoek op bedrijf, naam of e-mail. Zelfde kolommen en acties.</p>
+      <p class="small">Hier opent het tabblad Klanten. Elk wholesale-account uit de webshop, van alle eigenaren, live opgezocht. Zoek op bedrijf, naam of e-mail. Zelfde kolommen en acties.</p>
       <p class="small">Een klant die hier wel staat maar nog niet beheerd wordt, neem je op met <b>"in CRM beheren"</b>; pas daarna kun je taken en notities koppelen.</p>
     </div>
   </div>
   <div class="card" style="margin-top:18px">
     <h3>Vuistregel</h3>
-    <p class="small" style="margin:0">Werk dagelijks uit <b>Opvolgen</b>. Kijk wekelijks in <b>Belangrijke klanten</b> met het filter "niet besteld 90 dagen". Gebruik <b>Alle B2B-klanten</b> als je een specifieke klant zoekt.</p>
+    <p class="small" style="margin:0">Werk dagelijks uit <b>Opvolgen</b> (één klik verder). Kijk wekelijks in <b>Belangrijke klanten</b> met het filter "niet besteld 90 dagen". <b>Alle B2B-klanten</b> is je startpunt om een specifieke klant te zoeken.</p>
   </div>
   <div class="slideno">6</div>
 </div></section>
@@ -285,7 +285,7 @@ table.t td.r,table.t th.r{text-align:right;font-variant-numeric:tabular-nums}
   <div class="grid g2">
     <div class="card">
       <h3>Contact vastleggen</h3>
-      <p class="small">Knop <b>Contact</b> in de rij of op de klantkaart. Kies het type (gebeld, gemaild, sample, offerte, meeting), datum, een korte notitie en optioneel <b>opvolging plannen</b>: dat maakt meteen een taak op de gekozen datum.</p>
+      <p class="small">Knop <b>Contact</b> in de rij of op de klantkaart. Kies het type (gebeld, gemaild, WhatsApp, sample, offerte, meeting), datum, een korte notitie en optioneel <b>opvolging plannen</b>: over 2, 7, 14 of 30 dagen of op een datum, voor jezelf of voor een collega (die krijgt direct een mail).</p>
       <p class="small" style="margin:0">Effect: "laatst contact" springt naar vandaag, de klant verdwijnt uit Opvolgen tot over 60 dagen, en het moment staat in de tijdlijn van de klant.</p>
     </div>
     <div class="card">
@@ -398,12 +398,12 @@ table.t td.r,table.t th.r{text-align:right;font-variant-numeric:tabular-nums}
     <div class="mock drawer" style="padding:0">
       <div style="padding:14px 18px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:flex-start">
         <span style="font-size:20px">📞</span>
-        <div><div style="font-family:var(--display);font-weight:600;font-size:17px">Opnieuw bellen: Schreibwaren Krüger</div><div class="tiny" style="margin-top:4px"><span class="badge b-cobalt">16 okt</span> &nbsp;Eigenaar: Sanne</div></div>
+        <div><div style="font-family:var(--display);font-weight:600;font-size:17px">Opnieuw bellen: Schreibwaren Krüger</div><div class="tiny" style="margin-top:4px"><span class="badge b-cobalt">16 okt</span> &nbsp;<span class="field" style="padding:1px 8px;font-size:11.5px;color:var(--ink)">Sanne (ik) ▾</span></div></div>
         <span style="margin-left:auto;color:var(--faint)">✕</span>
       </div>
       <div style="padding:16px 18px">
         <div style="display:flex;justify-content:space-between;align-items:baseline"><div><div style="font-weight:600;font-size:16px">Schreibwaren Krüger</div><div class="tiny">Anke Krüger · Freiburg, DE · beheerd door Sanne</div></div><a class="small" href="#s8">Klantkaart →</a></div>
-        <div style="display:flex;gap:8px;margin:10px 0 14px;flex-wrap:wrap"><span class="btn primary">📞 +49 761 000000</span><span class="btn">✉️ info@krueger.example</span></div>
+        <div style="display:flex;gap:8px;margin:10px 0 14px;flex-wrap:wrap"><span class="btn primary">📞 +49 761 000000</span><span class="btn">💬 WhatsApp</span><span class="btn">✉️ info@krueger.example</span></div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
           <div class="stat"><div class="l">Laatste order</div><div class="v">12 mrt 2026</div><div class="s">7 mnd geleden</div></div>
           <div class="stat"><div class="l">Orders</div><div class="v">6</div><div class="s">laatst online 5 mnd geleden</div></div>
@@ -411,10 +411,11 @@ table.t td.r,table.t th.r{text-align:right;font-variant-numeric:tabular-nums}
           <div class="stat"><div class="l">Openstaand</div><div class="v">€ 0</div><div class="s">laatst gebeld 4 mnd geleden</div></div>
         </div>
         <div style="margin:12px 0;font-size:13px"><div style="display:flex;gap:8px;padding:5px 0;border-bottom:1px solid var(--line-soft)"><b>#WS-18xxx</b><span class="tiny">12 mrt 2026</span><span class="tiny">Afgerond</span><span style="margin-left:auto">€ 612</span></div><div style="display:flex;gap:8px;padding:5px 0"><b>#WS-17xxx</b><span class="tiny">8 okt 2025</span><span class="tiny">Afgerond</span><span style="margin-left:auto">€ 890</span></div></div>
-        <div class="tiny" style="text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Uitkomst</div>
-        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px"><span class="pill on">📞 Gebeld</span><span class="pill">🕓 Voicemail</span><span class="pill">↻ Niet bereikt</span><span class="pill">✉️ Gemaild</span></div>
-        <div class="field" style="display:flex;min-height:52px;align-items:flex-start;margin-bottom:8px">Gesproken: wil de nieuwe agenda's zien, stuurt volgende week bestelling in.</div>
-        <div class="field" style="display:flex;margin-bottom:10px;color:var(--ink)">Over 1 week ▾</div>
+        <div class="tiny" style="text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Uitkomst <span style="text-transform:none;letter-spacing:0">(meerdere mogelijk)</span></div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px"><span class="pill on">✓ Gebeld</span><span class="pill">🕓 Voicemail</span><span class="pill">↻ Niet bereikt</span><span class="pill on">✓ Gemaild</span><span class="pill">💬 WhatsApp</span></div>
+        <div class="field" style="display:flex;min-height:52px;align-items:flex-start;margin-bottom:8px">Gesproken: wil de nieuwe agenda's zien, catalogus gemaild.</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px"><div class="field" style="display:flex;color:var(--ink)">Op datum… ▾</div><div class="field" style="display:flex;color:var(--ink)">28-10-2026</div></div>
+        <div class="field" style="display:flex;margin-bottom:10px;color:var(--ink)">Voor Maurits ▾</div>
         <div style="display:flex;justify-content:flex-end;gap:8px"><span class="btn sm">Annuleren</span><span class="btn sm primary">Vastleggen</span></div>
       </div>
     </div>
@@ -422,11 +423,11 @@ table.t td.r,table.t th.r{text-align:right;font-variant-numeric:tabular-nums}
       <ol class="steps">
         <li><div><b>Klik op de taak</b> in de lijst. De drawer schuift van rechts in met de klant, telefoonnummer (klikbaar op je telefoon), e-mail en link naar de klantkaart.</div></li>
         <li><div><b>Lees de cijfers</b> voor je belt: laatste order, aantal orders, omzet, openstaand, de laatste drie orders en wanneer er voor het laatst contact was. Je notitie bij de taak staat eronder.</div></li>
-        <li><div><b>Kies de uitkomst</b>: Gebeld, Voicemail, Niet bereikt of Gemaild. Schrijf in één zin wat is besproken of afgesproken.</div></li>
-        <li><div><b>Vervolgtaak</b>: standaard over 2 dagen bij voicemail of niet bereikt, 1 week na mailen, geen na een gesprek. Pas aan naar wens (morgen tot 1 maand).</div></li>
-        <li><div><b>Vastleggen.</b> Het CRM logt het contactmoment, zet de taak op afgerond en maakt de vervolgtaak op jouw naam. Klaar, volgende.</div></li>
+        <li><div><b>Kies de uitkomst</b>, meerdere tegelijk mag: Gebeld, Voicemail of Niet bereikt (één van de drie) plus Gemaild en/of WhatsApp. Elke uitkomst wordt een eigen contactmoment. Schrijf in één zin wat is besproken of afgesproken.</div></li>
+        <li><div><b>Vervolgtaak</b>: standaard over 2 dagen bij voicemail of niet bereikt, 1 week na mailen, geen na een gesprek. Kies een termijn (morgen tot 1 maand) of <b>Op datum…</b>, en voor wie: jezelf of een collega ("wil bestellen maar heeft technische hulp nodig" → Voor Maurits). Die collega krijgt direct een mail met jouw notitie.</div></li>
+        <li><div><b>Vastleggen.</b> Het CRM logt de contactmomenten, zet de taak op afgerond en maakt de vervolgtaak aan. Klaar, volgende.</div></li>
       </ol>
-      <p class="small" style="margin-top:12px">Niets te melden? Onderaan staat <i>Alleen afronden, niets loggen</i>. Taak zonder gekoppelde klant? Dan zijn de uitkomst-knoppen uit: koppel eerst de klant.</p>
+      <p class="small" style="margin-top:12px"><b>Taak doorzetten:</b> de eigenaar in de kop is een dropdown. Kies een collega en de hele taak gaat naar hem of haar, met een mail erbij. Niets te melden? Onderaan staat <i>Alleen afronden, niets loggen</i>. Taak zonder gekoppelde klant? Dan zijn de uitkomst-knoppen uit: koppel eerst de klant.</p>
     </div>
   </div>
   <div class="slideno">11</div>
@@ -584,7 +585,8 @@ table.t td.r,table.t th.r{text-align:right;font-variant-numeric:tabular-nums}
     <div class="card"><h3>Geen telefoonnummer in de drawer.</h3><p class="small" style="margin:0">Het registratieformulier vraagt er niet verplicht om. Zoek het nummer via de website van de klant en vul het in op de klantkaart onder Gegevens → Bewerken; de drawer gebruikt het daarna direct.</p></div>
     <div class="card"><h3>Taak per ongeluk afgerond.</h3><p class="small" style="margin:0">Binnen zes seconden: <b>Ongedaan maken</b> onderin. Daarna: tabblad Afgerond → vinkje opnieuw klikken.</p></div>
     <div class="card"><h3>De taak zegt "niet aan een klant gekoppeld".</h3><p class="small" style="margin:0">Open de klantkaart van het juiste bedrijf en maak daar de taak opnieuw aan, of vraag Maurits of Justus om de taak te koppelen. Zonder koppeling kan de drawer niets loggen.</p></div>
-    <div class="card"><h3>Ik wil een klant overdragen.</h3><p class="small" style="margin:0">Eigenaar-dropdown in de rij, of in bulk in Belangrijke klanten. Open taken van die klant houden hun eigen eigenaar; pas die apart aan.</p></div>
+    <div class="card"><h3>Ik wil een klant of taak overdragen.</h3><p class="small" style="margin:0">Klant: eigenaar-dropdown in de rij, of in bulk in Belangrijke klanten. Taak: open de taak en kies in de kop een andere eigenaar; de collega krijgt direct een mail.</p></div>
+    <div class="card"><h3>Waar zie ik hoe de belactie loopt?</h3><p class="small" style="margin:0">Dashboard → tegel <b>Belwedstrijd</b>: per beller het aantal belpogingen (vandaag, deze week, totaal), gesproken, nog te bellen en orders binnen 30 dagen na een belcontact. "Omzet per land" kun je daar voor jezelf verbergen.</p></div>
   </div>
   <div class="slideno">17</div>
 </div></section>
